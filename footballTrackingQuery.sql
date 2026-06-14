@@ -36,3 +36,21 @@ VALUES
   ('Bayern Munich vs PSG', 'Champions League', 130.00, 'Available'),
   ('AC Milan vs Inter Milan', 'Serie A', 90.00, 'Sold Out'),
   ('Juventus vs Roma', 'Serie A', 80.00, 'Available');
+
+
+  -- CREATED bookings TABLE
+  CREATE TABLE bookings(
+  booking_id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(user_id) NOT NULL,
+  match_id INT REFERENCES matches(match_id) NOT NULL,
+  seat_number VARCHAR(10) NOT NULL,
+  payment_status payment_status DEFAULT 'Pending',
+  total_cost NUMERIC(10,2) CHECK(total_cost >= 0)
+);
+
+INSERT INTO bookings (user_id, match_id, seat_number, payment_status, total_cost)
+VALUES
+  (1, 1, 'A-12', 'Confirmed', 150.00),
+  (1, 2, 'B-04', 'Confirmed', 120.00),
+  (2, 1, 'A-13', 'Confirmed', 150.00),
+  (3, 2, 'C-20', 'Pending', 120.00);
