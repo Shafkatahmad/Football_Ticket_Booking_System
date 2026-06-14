@@ -74,3 +74,14 @@ WHERE full_name ILIKE 'tanvir%'
 SELECT user_id, match_id, COALESCE(payment_status, 'Action Required') AS payment_status
 FROM bookings
 WHERE payment_status IS NULL;
+
+-- Query 4: Retrieve match booking details along with the User's full name and the scheduled Match fixture teams.
+SELECT b.booking_id, u.full_name, m.fixture, b.total_cost
+FROM bookings b
+INNER JOIN users u ON b.user_id = u.user_id
+INNER JOIN matches m ON b.match_id = m.match_id;
+
+-- Query 5: Display a comprehensive list of all users and their booking IDs, ensuring that fans who have never bought a ticket are still listed.
+SELECT u.user_id, u.full_name, b.booking_id
+FROM users u
+LEFT JOIN bookings b ON u.user_id = b.user_id;
