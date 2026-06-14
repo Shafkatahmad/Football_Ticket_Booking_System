@@ -54,3 +54,12 @@ VALUES
   (1, 2, 'B-04', 'Confirmed', 120.00),
   (2, 1, 'A-13', 'Confirmed', 150.00),
   (3, 2, 'C-20', 'Pending', 120.00);
+
+
+
+-- QUERIES:
+
+-- Query 1: Retrieve all upcoming football matches belonging to the 'Champions League' where the match status is 'Available'.
+SELECT match_id, fixture, base_ticket_price
+FROM matches
+WHERE tournament_category = 'Champions League' AND match_status = 'Available';
